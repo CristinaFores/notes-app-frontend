@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { UserCredentials } from "../../hooks/types";
 import useUser from "../../hooks/useUser";
-import Button from "../Button/Button";
-import Input from "../Input/Input";
+import Container from "@mui/material/Container";
+import { Box, TextField, Grid, Link } from "@mui/material";
+import { ColorButton } from "../Button/ButtonStyled";
 
 const Login = () => {
   const { login } = useUser();
@@ -36,29 +37,48 @@ const Login = () => {
   };
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <label> </label>
-        <Input
-          type="text"
-          id="username"
-          placeholder="Username"
-          onChange={handleInputChange}
-          htmlFor="username"
-          textLabel="Username"
-        />
+      <Container maxWidth="xs">
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            "& > :not(style)": { m: 2 },
+          }}
+        >
+          <TextField
+            id="username"
+            name="username"
+            label="Username"
+            type="text"
+            fullWidth
+            required
+            autoFocus
+            onChange={handleInputChange}
+          />
+          <TextField
+            type="password"
+            id="password"
+            name="password"
+            label="Password"
+            fullWidth
+            required
+            autoFocus
+            onChange={handleInputChange}
+          />
 
-        <label></label>
-        <Input
-          type="password"
-          id="password"
-          placeholder="Password"
-          onChange={handleInputChange}
-          htmlFor="password"
-          textLabel="Password"
-        />
-
-        <Button ariaLabel="Login" text="Login" />
-      </form>
+          <ColorButton size="large" fullWidth variant="contained" type="submit">
+            Login
+          </ColorButton>
+          <Grid item>
+            <Link href="#" variant="body1">
+              {"Don't have an account? Sign Up"}
+            </Link>
+          </Grid>
+        </Box>
+      </Container>
     </div>
   );
 };

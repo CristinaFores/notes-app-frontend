@@ -2,13 +2,26 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./components/App/App";
 import reportWebVitals from "./reportWebVitals";
+import {
+  CssBaseline,
+  StyledEngineProvider,
+  ThemeProvider,
+} from "@mui/material";
+
+import mainTheme from "./styles/mainTheme";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={mainTheme}>
+        <CssBaseline>
+          <App />
+        </CssBaseline>
+      </ThemeProvider>
+    </StyledEngineProvider>
   </React.StrictMode>
 );
 
