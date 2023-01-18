@@ -1,16 +1,17 @@
-import React, { useState } from "react";
-import { UserCredentials } from "../../hooks/useUser/types";
-import useUser from "../../hooks/useUser/useUser";
-import Container from "@mui/material/Container";
+import { Container } from "@mui/system";
 import { Box, TextField, Grid, Link } from "@mui/material";
 import { ColorButton } from "../Button/ButtonStyled";
+import { RegisterData } from "../../hooks/useUser/types";
+import { useState } from "react";
+import useUser from "../../hooks/useUser/useUser";
 
-const Login = () => {
-  const { login } = useUser();
+const App = (): JSX.Element => {
+  const { register } = useUser();
 
-  const intialFormData: UserCredentials = {
+  const intialFormData: RegisterData = {
     username: "",
     password: "",
+    email: "",
   };
 
   const [formData, setFormData] = useState(intialFormData);
@@ -26,21 +27,23 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = async (event: React.SyntheticEvent) => {
+  const sendUsers = async (event: React.SyntheticEvent) => {
     event.preventDefault();
-    const formDataToSubmit: UserCredentials = {
+
+    const formDataToSubmit: RegisterData = {
       username: formData.username,
       password: formData.password,
+      email: formData.email,
     };
-
-    await login(formDataToSubmit);
+    await register(formDataToSubmit);
   };
+
   return (
     <div>
       <Container maxWidth="xs">
         <Box
           component="form"
-          onSubmit={handleSubmit}
+          onSubmit={sendUsers}
           sx={{
             display: "flex",
             flexDirection: "column",
@@ -58,6 +61,18 @@ const Login = () => {
             autoFocus
             onChange={handleInputChange}
           />
+
+          <TextField
+            id="email"
+            name="email"
+            label="Email"
+            type="email"
+            fullWidth
+            required
+            autoFocus
+            onChange={handleInputChange}
+          />
+
           <TextField
             type="password"
             id="password"
@@ -70,11 +85,11 @@ const Login = () => {
           />
 
           <ColorButton size="large" fullWidth variant="contained" type="submit">
-            Login
+            Register
           </ColorButton>
           <Grid item>
-            <Link href="/register" variant="body1">
-              {"Don't have an account? Sign Up"}
+            <Link href="/login" variant="body1">
+              {"Do you already have an account? Get in"}
             </Link>
           </Grid>
         </Box>
@@ -83,4 +98,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default App;
