@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { UserCredentials } from "../../hooks/types";
-import useUser from "../../hooks/useUser";
+import { UserCredentials } from "../../hooks/useUser/types";
+import useUser from "../../hooks/useUser/useUser";
 import Container from "@mui/material/Container";
 import { Box, TextField, Grid, Link } from "@mui/material";
 import { ColorButton } from "../Button/ButtonStyled";
@@ -32,7 +32,7 @@ const Login = () => {
       username: formData.username,
       password: formData.password,
     };
-    console.log(formDataToSubmit);
+
     await login(formDataToSubmit);
   };
   return (
@@ -73,7 +73,7 @@ const Login = () => {
             Login
           </ColorButton>
           <Grid item>
-            <Link href="#" variant="body1">
+            <Link href="/register" variant="body1">
               {"Don't have an account? Sign Up"}
             </Link>
           </Grid>
