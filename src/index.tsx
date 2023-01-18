@@ -2,13 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./components/App/App";
 import reportWebVitals from "./reportWebVitals";
-import {
-  CssBaseline,
-  StyledEngineProvider,
-  ThemeProvider,
-} from "@mui/material";
-
-import mainTheme from "./styles/mainTheme";
+import { CssBaseline, StyledEngineProvider } from "@mui/material";
+import { BrowserRouter } from "react-router-dom";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -16,11 +11,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={mainTheme}>
-        <CssBaseline>
+      <CssBaseline>
+        <BrowserRouter>
           <App />
-        </CssBaseline>
-      </ThemeProvider>
+        </BrowserRouter>
+      </CssBaseline>
     </StyledEngineProvider>
   </React.StrictMode>
 );
