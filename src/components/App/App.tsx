@@ -1,6 +1,6 @@
 import Login from "../Login/Login";
 
-const App = () => {
+const App = (): JSX.Element => {
   return (
     <div>
       <Login />
