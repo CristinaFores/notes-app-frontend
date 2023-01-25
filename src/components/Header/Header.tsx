@@ -77,7 +77,7 @@ const Header = ({ title }: HeaderProps): JSX.Element => {
               component="div"
               sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
             >
-              Notes Book
+              {title}
             </Typography>
             <Search hidden>
               <SearchIconWrapper>
