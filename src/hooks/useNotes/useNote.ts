@@ -1,11 +1,29 @@
-import { useEffect } from "react";
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
+import { SetStateAction, useEffect, useState } from "react";
 
-const useNote = () => {
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+
+const useNote = (axiosParams: AxiosRequestConfig) => {
+  const [response, setResponse] = useState<AxiosResponse>();
+  const [error, setError] = useState<AxiosError>();
+  const [loading, setLoading] = useState(true);
+
+  const fetchData = async (params: AxiosRequestConfig) => {
+    try {
+      const result = await axios.request(params);
+      await setResponse(result);
+    } catch (err) {
+      setError(err as SetStateAction<AxiosError<unknown, any> | undefined>);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    fetch("https://dog.ceo/api/breeds/image/random").then((response) =>
-      response.json()
-    );
+    fetchData(axiosParams);
   }, []);
+
+  return { response, error, loading };
 };
 
 export default useNote;
